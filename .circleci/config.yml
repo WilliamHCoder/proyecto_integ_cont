@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - run:
+          name: Validar Entorno y Docker Compose
+          command: |
+            docker --version
+            docker compose version
+      - run:
+          name: Verificar Sintaxis de la Infraestructura
+          command: |
+            docker compose config
+            echo "Infraestructura validada con exito en CircleCI"
