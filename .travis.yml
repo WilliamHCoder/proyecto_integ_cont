@@ -11,4 +11,4 @@ before_script:
 
 script:
   - docker-compose config
-  - echo "Infraestructura validada con exito en Travis CI"
+  - echo "Infraestructura validada con exito en TraviCI"
