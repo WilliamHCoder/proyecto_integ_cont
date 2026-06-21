@@ -1,0 +1,14 @@
+language: generic
+os: linux
+dist: jammy
+
+services:
+  - docker
+
+before_script:
+  - docker --version
+  - docker-compose --version
+
+script:
+  - docker-compose config
+  - echo "Infraestructura validada con exito en Travis CI"

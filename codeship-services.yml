@@ -1,0 +1,3 @@
+app_verificadora:
+  image: node:18-alpine
+  encrypted_env_file: .env.encrypted

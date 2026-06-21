@@ -1,0 +1,3 @@
+- name: Verificar Entorno Codeship
+  service: app_verificadora
+  command: node -v
