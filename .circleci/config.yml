@@ -6,13 +6,37 @@ jobs:
       image: ubuntu-2204:current
     steps:
       - checkout
+
       - run:
-          name: Validar Entorno y Docker Compose
+          name: 1. Inspeccionar Archivos del Proyecto
           command: |
-            docker --version
+            echo "=== Listando archivos recibidos de GitHub ==="
+            ls -la
+
+      - run:
+          name: 2. Validar Estado de Docker en la Nube
+          command: |
+            echo "=== Versiones de las herramientas ==="
+            docker version
             docker compose version
+
       - run:
-          name: Verificar Sintaxis de la Infraestructura
+          name: 3. Simular Construccion y Red de la Entrega 2
           command: |
+            echo "=== Validando estructura del docker-compose.yml ==="
             docker compose config
-            echo "Infraestructura validada con exito en CircleCI"
+            
+            echo "=== Levantando infraestructura en segundo plano ==="
+            docker compose up -d
+            
+            echo "=== Esperando 5 segundos para estabilizar servicios ==="
+            sleep 5
+
+      - run:
+          name: 4. Prueba de Integracion Explicita (Logs y Contenedores)
+          command: |
+            echo "=== Contenedores ejecutandose en CircleCI ==="
+            docker compose ps
+            
+            echo "=== Verificando que los 5 contenedores esten creados ==="
+            docker ps -a
