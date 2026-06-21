@@ -1,0 +1,34 @@
+name: Integracion Continua Multi-Plataforma
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root_password_poli
+          MYSQL_DATABASE: mi_base_datos
+        ports:
+          - 3306:3306
+
+    steps:
+    - name: Descargar codigo de GitHub
+      uses: actions/checkout@v3
+
+    - name: Validar versiones de Docker
+      run: |
+        docker --version
+        docker-compose --version
+
+    - name: Verificar Sintaxis de la Infraestructura
+      run: |
+        docker-compose config
+        echo "Infraestructura validada con exito en la Nube de GitHub Actions"
