@@ -26,7 +26,7 @@ jobs:
     - name: Validar versiones de Docker
       run: |
         docker --version
-        docker-compose version
+        docker compose version
 
     - name: Verificar Sintaxis de la Infraestructura
       run: |
